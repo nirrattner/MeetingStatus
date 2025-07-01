@@ -27,7 +27,7 @@ class Application(QApplication):
     self.tray.setVisible(True)
     self.tray.setContextMenu(self.menu)
 
-    meeting_status_client = MeetingStatusClient('localhost')
+    meeting_status_client = MeetingStatusClient('192.168.1.114', port=80)
     async_status_request_runner = AsyncStatusRequestRunner(meeting_status_client)
     self.event_loop = EventLoop(
       getuser(),
