@@ -1,0 +1,5 @@
+*.py~
+*.swp
+__pycache__
+build
+dist
