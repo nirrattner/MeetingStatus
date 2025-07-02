@@ -11,7 +11,7 @@ from setuptools import setup
 
 APP = ['run_client.py']
 DATA_FILES = [
-  ('resources', glob.glob('meeting_status_client/resources/*')),
+  ('resources', glob.glob('resources/*')),
 ]
 OPTIONS = {
   'includes': ['imp'],

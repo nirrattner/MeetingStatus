@@ -16,7 +16,7 @@ class MeetingStatusClient:
 self, status: Status) -> list[Status]:
     request_body = StatusRequest(status)
     response = requests.post(
-      f'http://{self.host}:{self.port}/status',
+      f'http://{self.host}:{self.port}/meeting_status/status',
       json=request_body.to_dict)
 
     if response.status_code != 200:
