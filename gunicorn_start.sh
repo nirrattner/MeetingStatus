@@ -7,7 +7,7 @@ NUM_THREADS=4
 
 cd /home/nirrattner/Documents/MeetingStatus
 
-exec /home/nirrattner/Documents/MeetingStatus/.venv/bin/gunicorn runserver:app \
+exec /home/nirrattner/Documents/MeetingStatus/.venv/bin/gunicorn run_server:app \
   --name $NAME \
   --workers $NUM_WORKERS \
   --threads $NUM_THREADS \
