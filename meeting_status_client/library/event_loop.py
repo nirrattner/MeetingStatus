@@ -45,7 +45,7 @@ class Event:
 
 
 class EventLoop(QObject):
-  callback_signal = pyqtSignal(object, object, object)
+  callback_signal = pyqtSignal(object, object)
 
   def __init__(
       self,
@@ -89,7 +89,6 @@ class EventLoop(QObject):
       else:
         print(f'Unsupported event {event.event_type} for state {self.state}')
     except Empty:
-      print('TIMEOUT')
       status_type = get_status_type()
       if status_type != self.last_status_type \
           or time() - self.last_response_timestamp  > STATUS_REQUEST_PERIOD_SECONDS:
@@ -126,7 +125,6 @@ class EventLoop(QObject):
 
   def _initiate_status_request(self):
     self.state = StateType.AWAITING_RESPONSE
-    self.callback_signal.emit(self.state, None, None)
 
     self.last_status_type = get_status_type()
     self.async_status_request_runner.enqueue_request(
@@ -142,7 +140,7 @@ class EventLoop(QObject):
       exception: Exception = None):
     self.state = StateType.AWAITING_REQUEST
     self.last_response_timestamp = time()
-    self.callback_signal.emit(self.state, statuses, exception)
+    self.callback_signal.emit(statuses, exception)
 
   def _dequeue(self, timeout: float):
     if timeout <= 0:

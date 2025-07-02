@@ -36,13 +36,12 @@ class Application(QApplication):
 
     self.menu.aboutToShow.connect(self.enqueue_request)
 
-  @pyqtSlot(object, object, object)
+  @pyqtSlot(object, object)
   def event_loop_callback(
       self,
-      state: StateType,
       statuses: list[Status] = None,
       exception: Exception = None):
-    self.menu.update_state(state, statuses, exception)
+    self.menu.update_state(statuses, exception)
 
   @pyqtSlot()
   def enqueue_request(self):
