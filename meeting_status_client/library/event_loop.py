@@ -71,7 +71,6 @@ class EventLoop(QObject):
     self.thread.start()
 
   def run(self):
-
     while True:
       try:
         if self.state == StateType.AWAITING_REQUEST:
@@ -90,9 +89,10 @@ class EventLoop(QObject):
       else:
         print(f'Unsupported event {event.event_type} for state {self.state}')
     except Empty:
+      print('TIMEOUT')
       status_type = get_status_type()
       if status_type != self.last_status_type \
-          or self.last_response_timestamp - time() > STATUS_REQUEST_PERIOD_SECONDS:
+          or time() - self.last_response_timestamp  > STATUS_REQUEST_PERIOD_SECONDS:
         self._initiate_status_request()
 
   def run_awaiting_response_state(self):

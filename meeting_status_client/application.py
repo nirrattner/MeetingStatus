@@ -34,7 +34,7 @@ class Application(QApplication):
       async_status_request_runner,
       self.event_loop_callback)
 
-    self.menu.aboutToShow.connect(self.event_loop.enqueue_status_request_event)
+    self.menu.aboutToShow.connect(self.enqueue_request)
 
   @pyqtSlot(object, object, object)
   def event_loop_callback(
@@ -43,6 +43,11 @@ class Application(QApplication):
       statuses: list[Status] = None,
       exception: Exception = None):
     self.menu.update_state(state, statuses, exception)
+
+  @pyqtSlot()
+  def enqueue_request(self):
+    self.event_loop.enqueue_status_request_event()
+
 
 if __name__ == '__main__':
   application = Application([])

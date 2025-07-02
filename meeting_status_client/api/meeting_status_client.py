@@ -12,8 +12,7 @@ class MeetingStatusClient:
     self.host = host
     self.port = port
 
-  def submit_status(
-self, status: Status) -> list[Status]:
+  def submit_status(self, status: Status) -> list[Status]:
     request_body = StatusRequest(status)
     response = requests.post(
       f'http://{self.host}:{self.port}/meeting_status/status',
