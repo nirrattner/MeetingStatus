@@ -14,7 +14,9 @@ class StatusManager:
     self.statuses = {}
 
   def get_statuses(self) -> List[Status]:
-    return list(self.statuses.values())
+    statuses = list(self.statuses.values())
+    statuses.sort(key=lambda status: status.user)
+    return statuses
 
   def update_status(self, status: Status):
     self.statuses[status.user] = status
