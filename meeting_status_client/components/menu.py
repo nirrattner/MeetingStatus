@@ -37,6 +37,7 @@ class Menu(QMenu):
       statuses: list[Status] = None,
       exception=None):
     if exception:
+      print(exception)
       self.error_action.setVisible(True)
       self.error_separator.setVisible(True)
 
