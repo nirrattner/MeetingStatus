@@ -1,3 +1,5 @@
+from time import time
+
 from PyQt5.QtWidgets import (
   QAction,
   QMenu
@@ -7,6 +9,10 @@ from meeting_status_core.model.status import Status, StatusType
 
 STATUS_INDEX_START = 2
 STATUS_INDEX_END = -2
+
+TIME_DAY = 24 * 60 * 60
+TIME_HOUR = 60 * 60
+TIME_MINUTE = 60
 
 
 class Menu(QMenu):
@@ -67,7 +73,18 @@ class Menu(QMenu):
     self.status_separator.setVisible(len(self.statuses) > 0)
 
 
-def format_status(status):
+def format_status(status: Status) -> str:
   status_type = StatusType(status.status_type).name
   formatted_status_type = status_type[0] + status_type[1:].lower()
-  return f'{status.user} - {formatted_status_type}'
+  return f'{status.user} - {formatted_status_type} {format_timestamp(status.timestamp)}'
+
+
+def format_timestamp(timestamp: int) -> str:
+  elapsed_time = time() - timestamp
+  if elapsed_time > TIME_DAY:
+    return '(>1 day ago)'
+  if elapsed_time > TIME_HOUR:
+    return '(>1 hour ago)'
+  if elapsed_time > TIME_MINUTE:
+    return '(>1 minute ago)'
+  return ''

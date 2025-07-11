@@ -79,7 +79,6 @@ class Application(QApplication):
       self,
       status: StatusType = None,
       timestamp: int = None):
-    print('status_request')
     status = status or get_status_type()
     timestamp = timestamp or int(time())
     self.last_status = status
