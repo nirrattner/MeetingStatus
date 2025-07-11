@@ -44,8 +44,8 @@ class Menu(QMenu):
       exception=None):
     if exception:
       print(exception)
-      self.error_action.setVisible(True)
-      self.error_separator.setVisible(True)
+    self.error_action.setVisible(not exception is None)
+    self.error_separator.setVisible(not exception is None)
 
     if statuses:
       self.statuses = statuses
